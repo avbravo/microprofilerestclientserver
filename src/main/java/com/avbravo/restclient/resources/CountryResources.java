@@ -61,8 +61,7 @@ public class CountryResources {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(Country country) {
         try {
-            if (countryRepository.save(country)) {
-               
+            if (countryRepository.save(country)) {               
                 return Response.status(201).entity("Ok").build();
             } else {
                
@@ -100,16 +99,13 @@ public class CountryResources {
 
     // <editor-fold defaultstate="collapsed" desc="@Path("/delete")">
    
-//    @Path("/delete")
     @DELETE
     @Path("/delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") String id) {
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response delete(Country country) {
+
         try {
            Document doc = new Document("id",id);
-//            if (countryRepository.delete(country)) {
             if (countryRepository.delete(doc)) {
            
                 return Response.status(201).entity("Ok").build();
@@ -135,14 +131,13 @@ public class CountryResources {
         Country country = new Country();
         try {
             
-            System.out.println("---->buscare id "+id);
+    
             country.setId(id);
             Optional<Country> optional = countryRepository.findById(country);
             if (optional.isPresent()) {
-                System.out.println("---> encontrado");
+    
                 country = optional.get();
-                System.out.println("----> name "+country.getName());
-            }
+                }
         } catch (Exception e) {
             System.out.println("findById) " + e.getLocalizedMessage());
 
