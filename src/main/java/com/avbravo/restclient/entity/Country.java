@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avbravo.restclient.domains;
+package com.avbravo.restclient.entity;
+
+import com.avbravo.jmoordb.anotations.Id;
+
+
 
 /**
  *
  * @author avbravo
  */
 public class Country {
+    @Id
     private String id;
     private String name;
 
@@ -37,6 +42,11 @@ public class Country {
         this.name = name;
     }
 
+    
+    
+    
+    
+    
    public static class Builder{
         private String id;
     private String name;

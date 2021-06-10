@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package com.avbravo.restclient.resources;
-
-import com.avbravo.restclient.domains.Country;
+import com.avbravo.jmoordb.mongodb.repository.Repository;
+import com.avbravo.jmoordb.util.JmoordbUtil;
+import com.avbravo.restclient.entity.Country;
 import com.avbravo.restclient.repository.CountryRepository;
+import static com.couchbase.client.java.query.N1qlParams.build;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.security.RolesAllowed;
@@ -24,15 +25,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+import org.bson.Document;
 /**
  *
  * @author avbravo
  */
 @Path("/message")
 public class CountryResources {
- @Inject
- CountryRepository countryRepository;
+
+    @Inject
+    CountryRepository countryRepository;
 
     @GET
     @Path("/text")
@@ -44,47 +46,50 @@ public class CountryResources {
     @Path("/first")
     @Produces(MediaType.APPLICATION_JSON)
     public Country first() {
-               return countryRepository.first();
+        return countryRepository.findAll().get(0);
     }
 
-    
-    
-    
     @GET
     @Path("/findall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Country> findAll() {
         return countryRepository.findAll();
     }
-    
-    
+
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(Country  country ){
-        if(countryRepository.save(country )){
-            return Response.status(201).entity("Ok").build();
-        }else{
-            return Response.status(400).entity("error ").build();
+    public Response add(Country country) {
+        try {
+            if (countryRepository.save(country)) {
+               
+                return Response.status(201).entity("Ok").build();
+            } else {
+               
+                return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
+            }
+        } catch (Exception e) {
+            return Response.status(400).entity("Error!!" + e.getLocalizedMessage()).build();
+
         }
     }
+
     
     
     
-    
-    
-      // <editor-fold defaultstate="collapsed" desc="@Path("/update")">
+    // <editor-fold defaultstate="collapsed" desc="@Path("/update")">
     @PUT
     @Path("/update")
-//    @RolesAllowed({"admin"})
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(Country country ) {
+    public Response update(Country country) {
         try {
 
-            if (countryRepository.update(country )) {
+            if (countryRepository.update(country)) {
+             
                 return Response.status(201).entity("Ok").build();
             }
-            return Response.status(400).entity("Error").build();
+            
+              return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
         } catch (Exception e) {
             return Response.status(400).entity("Error!!" + e.getLocalizedMessage()).build();
 
@@ -94,143 +99,57 @@ public class CountryResources {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="@Path("/delete")">
+   
+//    @Path("/delete")
     @DELETE
-    @Path("/delete")
+    @Path("/delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response delete(Country country ) {
+    public Response delete(@PathParam("id") String id) {
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response delete(Country country) {
         try {
-
-            if (countryRepository.delete(country )) {
+           Document doc = new Document("id",id);
+//            if (countryRepository.delete(country)) {
+            if (countryRepository.delete(doc)) {
+           
                 return Response.status(201).entity("Ok").build();
             }
-
-            return Response.status(400).entity("Error ").build();
+           
+             return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
         } catch (Exception e) {
             return Response.status(400).entity("Ocurrio un error!!" + e.getLocalizedMessage()).build();
         }
 
     }
     // </editor-fold>
-//    // <editor-fold defaultstate="collapsed" desc="@Path("/search/{idcountry }")">
-//
-//    @GET
-//    @Path("/search/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Country findByIdcountry (@PathParam("id") String id) {
-//        Country country = new Country ();
-//        try {
-//            country .setId(id);
-//            Optional<Country > optional = countryRepository.findById(country );
-//            if (optional.isPresent()) {
-//                country = optional.get();
-//
-//            }
-//        } catch (Exception e) {
-//            System.out.println("findById) " + e.getLocalizedMessage());
-//            
-//        }
-//
-//        return country ;
-//    }
-//// </editor-fold>
-
-
-   
-//  // <editor-fold defaultstate="collapsed" desc=" @Path("/jsonquery")">
-//    /**
-//     * Recive json para consulta y ordenaciones y paginacion y realiza la
-//     * busqueda
-//     *
-//     * @param query
-//     * @param sort
-//     * @param pageNumber
-//     * @param rowForPage
-//     * @return
-//     */
-//    @GET
-//    @Path("/jsonquery")
-//    @RolesAllowed({"admin"})
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//
-//    public List<Country > jsonQuery(@QueryParam("query") String query, @QueryParam("sort") String sort,
-//            @QueryParam("pagenumber") Integer pageNumber, @QueryParam("rowforpage") Integer rowForPage) {
-//        List<Country > suggestions = new ArrayList<>();
-//        try {
-//
-//            Document docQuery = country Repository.jsonToDocument(query);
-//            Document docSort = country Repository.jsonToDocument(sort);
-//
-//            suggestions = country Repository.findPagination(docQuery, pageNumber, rowForPage, docSort);
-//
-//        } catch (Exception e) {
-//            System.out.println(JmoordbUtil.nameOfMethod() + " " + e.getLocalizedMessage());
-//            
-//
-//        }
-//
-//        return suggestions;
-//    }
-//
-//// </editor-fold>
-//    // <editor-fold defaultstate="collapsed" desc="     @Path("/jsonquerywithoutpagination")">
-//    /**
-//     * Hace cosultas sin paginacion
-//     *
-//     * @param query
-//     * @param sort
-//     * @return
-//     */
-//    @GET
-//    @Path("/jsonquerywithoutpagination")
-//    @RolesAllowed({"admin"})
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//
-//    public List<Country > jsonQueryWithoutPagination(@QueryParam("query") String query, @QueryParam("sort") String sort) {
-//        List<Country > suggestions = new ArrayList<>();
-//        try {
-//
-//            Document docQuery = country Repository.jsonToDocument(query);
-//            Document docSort = country Repository.jsonToDocument(sort);
-//
-//            suggestions = country Repository.findBy(docQuery, docSort);
-//
-//        } catch (Exception e) {
-//            System.out.println(JmoordbUtil.nameOfMethod() + " " + e.getLocalizedMessage());
-//
-//        }
-//
-//        return suggestions;
-//    }
-//
-//// </editor-fold>
-//    // <editor-fold defaultstate="collapsed" desc=" Response countJsonQuery((@QueryParam("query") String query)">
-//    /**
-//     * Cuenta el numero de registros 
-//     * @param query
-//     * @return 
-//     */
-//    @GET
-//    @Path("/countjsonquery")
-//    @RolesAllowed({"admin"})
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//
-//    public Response countJsonQuery(@QueryParam("query") String query) {
-//        List<Country > suggestions = new ArrayList<>();
-//        try {
-//
-//            Document docQuery = country Repository.jsonToDocument(query);
-//            Integer total = 0;
-//
-//            total = country Repository.count(docQuery);
-//            return Response.status(201).entity(total).build();
-//
-//        } catch (Exception e) {
-//
-//           
-//            return Response.status(400).entity("error: " + country Repository.getException().getLocalizedMessage()).build();
-//        }
-//    }
-//
-//// </editor-fold>
     
+   
+    
+    
+//    // <editor-fold defaultstate="collapsed" desc="@Path("/search/{idcountry }")">
+
+    @GET
+    @Path("/search/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Country findById(@PathParam("id") String id) {
+        Country country = new Country();
+        try {
+            
+            System.out.println("---->buscare id "+id);
+            country.setId(id);
+            Optional<Country> optional = countryRepository.findById(country);
+            if (optional.isPresent()) {
+                System.out.println("---> encontrado");
+                country = optional.get();
+                System.out.println("----> name "+country.getName());
+            }
+        } catch (Exception e) {
+            System.out.println("findById) " + e.getLocalizedMessage());
+
+        }
+
+        return country;
+    }
+//// </editor-fold>
+
 }
