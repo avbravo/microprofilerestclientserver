@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.avbravo.restclient.resources;
+
 import com.avbravo.jmoordb.mongodb.repository.Repository;
 import com.avbravo.jmoordb.util.JmoordbUtil;
 import com.avbravo.restclient.entity.Country;
@@ -26,6 +27,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.bson.Document;
+
 /**
  *
  * @author avbravo
@@ -45,6 +47,7 @@ public class CountryResources {
     @GET
     @Path("/first")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
     public Country first() {
         return countryRepository.findAll().get(0);
     }
@@ -52,6 +55,7 @@ public class CountryResources {
     @GET
     @Path("/findall")
     @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed({"admin"})
     public List<Country> findAll() {
         return countryRepository.findAll();
     }
@@ -59,13 +63,14 @@ public class CountryResources {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
     public Response add(Country country) {
         try {
-            if (countryRepository.save(country)) {               
+            if (countryRepository.save(country)) {
                 return Response.status(201).entity("Ok").build();
             } else {
-               
-                return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
+
+                return Response.status(400).entity("error " + countryRepository.getException().getLocalizedMessage()).build();
             }
         } catch (Exception e) {
             return Response.status(400).entity("Error!!" + e.getLocalizedMessage()).build();
@@ -73,22 +78,20 @@ public class CountryResources {
         }
     }
 
-    
-    
-    
     // <editor-fold defaultstate="collapsed" desc="@Path("/update")">
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
     public Response update(Country country) {
         try {
 
             if (countryRepository.update(country)) {
-             
+
                 return Response.status(201).entity("Ok").build();
             }
-            
-              return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
+
+            return Response.status(400).entity("error " + countryRepository.getException().getLocalizedMessage()).build();
         } catch (Exception e) {
             return Response.status(400).entity("Error!!" + e.getLocalizedMessage()).build();
 
@@ -98,46 +101,42 @@ public class CountryResources {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="@Path("/delete")">
-   
     @DELETE
     @Path("/delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
     public Response delete(@PathParam("id") String id) {
 
         try {
-           Document doc = new Document("id",id);
+            Document doc = new Document("id", id);
             if (countryRepository.delete(doc)) {
-           
+
                 return Response.status(201).entity("Ok").build();
             }
-           
-             return Response.status(400).entity("error "+countryRepository.getException().getLocalizedMessage()).build();
+
+            return Response.status(400).entity("error " + countryRepository.getException().getLocalizedMessage()).build();
         } catch (Exception e) {
             return Response.status(400).entity("Ocurrio un error!!" + e.getLocalizedMessage()).build();
         }
 
     }
     // </editor-fold>
-    
-   
-    
-    
-//    // <editor-fold defaultstate="collapsed" desc="@Path("/search/{idcountry }")">
 
+//    // <editor-fold defaultstate="collapsed" desc="@Path("/search/{idcountry }")">
     @GET
     @Path("/search/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
     public Country findById(@PathParam("id") String id) {
         Country country = new Country();
         try {
-            
-    
+
             country.setId(id);
             Optional<Country> optional = countryRepository.findById(country);
             if (optional.isPresent()) {
-    
+
                 country = optional.get();
-                }
+            }
         } catch (Exception e) {
             System.out.println("findById) " + e.getLocalizedMessage());
 
