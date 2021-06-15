@@ -5,15 +5,10 @@
  */
 package com.avbravo.restclient.resources;
 
-import com.avbravo.jmoordb.mongodb.repository.Repository;
-import com.avbravo.jmoordb.util.JmoordbUtil;
 import com.avbravo.restclient.entity.Country;
 import com.avbravo.restclient.repository.CountryRepository;
-import static com.couchbase.client.java.query.N1qlParams.build;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,7 +18,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.bson.Document;
