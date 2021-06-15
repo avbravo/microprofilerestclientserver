@@ -27,6 +27,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.bson.Document;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 /**
  *
@@ -38,10 +39,16 @@ public class CountryResources {
     @Inject
     CountryRepository countryRepository;
 
+     // <editor-fold defaultstate="collapsed" desc="MicroprofileConfig() ">
+
+    @Inject
+    @ConfigProperty(name = "message")
+    private String message;
+    // </editor-fold>
     @GET
     @Path("/text")
     public String getHello() {
-        return "hello world from Rest Client!";
+        return message;
     }
 
     @GET
