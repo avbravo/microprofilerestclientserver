@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
 
 
 @ApplicationPath("resources")
-@BasicAuthenticationMechanismDefinition(realmName = "admin-realm")
+//@BasicAuthenticationMechanismDefinition(realmName = "admin-realm")
 public class JAXRSConfiguration extends Application {
  @Override
     public Set<Class<?>> getClasses() {

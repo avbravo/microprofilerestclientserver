@@ -47,7 +47,7 @@ public class CountryResources {
     @GET
     @Path("/first")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
     public Country first() {
         return countryRepository.findAll().get(0);
     }
@@ -55,7 +55,7 @@ public class CountryResources {
     @GET
     @Path("/findall")
     @Produces(MediaType.APPLICATION_JSON)
-  @RolesAllowed({"admin"})
+//  //@RolesAllowed({"admin"})
     public List<Country> findAll() {
         return countryRepository.findAll();
     }
@@ -63,7 +63,7 @@ public class CountryResources {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
     public Response add(Country country) {
         try {
             if (countryRepository.save(country)) {
@@ -82,7 +82,7 @@ public class CountryResources {
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
     public Response update(Country country) {
         try {
 
@@ -104,7 +104,7 @@ public class CountryResources {
     @DELETE
     @Path("/delete/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
     public Response delete(@PathParam("id") String id) {
 
         try {
@@ -126,7 +126,7 @@ public class CountryResources {
     @GET
     @Path("/search/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
     public Country findById(@PathParam("id") String id) {
         Country country = new Country();
         try {

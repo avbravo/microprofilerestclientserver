@@ -5,10 +5,8 @@
  */
 package com.avbravo.restclient.security;
 import com.avbravo.jmoordb.util.JmoordbUtil;
-import com.avbravo.jmoordbutils.JsfUtil;
 import static java.util.Arrays.asList;
 import java.util.HashSet;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -24,6 +22,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  *
  * @author avbravo
  */
+@ApplicationScoped
 public class AuthentificactionIdentityStore implements IdentityStore {
 
     String userAutentification;
@@ -51,8 +50,9 @@ public class AuthentificactionIdentityStore implements IdentityStore {
     public CredentialValidationResult validate(UsernamePasswordCredential usernamePasswordCredential) {
         try {
             System.out.println("----------------UsernamePasswordCredential---------------------------------");
-            System.out.println("usernamePasswordCredential.toString() "+usernamePasswordCredential.toString());
-            System.out.
+            System.out.println("usernamePasswordCredential.getCaller() "+usernamePasswordCredential.getCaller());
+            System.out.println("usernamePasswordCredential.getPasswordAsString() "+usernamePasswordCredential.getPasswordAsString());
+            
             System.out.println("-------------------------------------------------");
             System.out.println("-->>> validando "+userSecurity.get() + " passwortd "+passwordSecurity.get());
             userAutentification = JmoordbUtil.desencriptar(userSecurity.get());
