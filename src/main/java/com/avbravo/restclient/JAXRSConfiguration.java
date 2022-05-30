@@ -8,7 +8,7 @@ import javax.ws.rs.core.Application;
 
 
 
-@ApplicationPath("resources")
+@ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
  @Override
     public Set<Class<?>> getClasses() {
@@ -16,7 +16,7 @@ public class JAXRSConfiguration extends Application {
         try {
             JmoordbConnection jmc = new JmoordbConnection.Builder()
                     .withSecurity(false)
-                    .withDatabase("mydatabase")
+                    .withDatabase("autentification")
                     .withHost("")
                     .withPort(0)
                     .withUsername("")

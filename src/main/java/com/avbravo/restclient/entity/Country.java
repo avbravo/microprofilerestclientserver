@@ -6,6 +6,7 @@
 package com.avbravo.restclient.entity;
 
 import com.avbravo.jmoordb.anotations.Id;
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 
 
@@ -14,55 +15,53 @@ import com.avbravo.jmoordb.anotations.Id;
  * @author avbravo
  */
 public class Country {
-    @Id
-    private String id;
-    private String name;
+    private String idcountry;
+    private String country;
 
     public Country() {
     }
 
-    public Country(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public Country(String idcountry, String country) {
+        this.idcountry = idcountry;
+        this.country = country;
     }
 
-    public String getId() {
-        return id;
+    public String getIdcountry() {
+        return idcountry;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdcountry(String idcountry) {
+        this.idcountry = idcountry;
     }
 
-    public String getName() {
-        return name;
+    public String getCountry() {
+        return country;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Country)) {
+            return false;
+        }
+        Country other = (Country) object;
+        if ((this.idcountry == null && other.idcountry!= null) || (this.idcountry!= null && !this.idcountry.equals(other.idcountry))) {
+            return false;
+        }
+        return true;
     }
 
-    
-    
-    
-    
-    
-   public static class Builder{
-        private String id;
-    private String name;
-    
-    public Builder id(String id){
-        this.id = id;
-        return this;
-    }
-    public Builder name(String name){
-        this.name= name;
-        return this;
-    }
-    
-    public Country build(){
-        return new Country(id, name);
-    }
-   }
+//    public boolean equalsReflection(Object object) {
+//        if (!(object instanceof Country)) {
+//            return false;
+//        }
+//        Country other = (Country) object;
+//        if ((this.idcountry == null && other.idcountry != null) || (this.idcountry!= null && !this.idcountry.equals(other.idcountry))) {
+//            return false;
+//        }
+//        return EqualsBuilder.reflectionEquals(this, object);
+//    }
     
 }

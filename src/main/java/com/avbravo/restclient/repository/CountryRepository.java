@@ -17,6 +17,6 @@ import javax.ejb.Stateless;
 public class CountryRepository extends Repository<Country> {
 
   public CountryRepository(){
-      super(Country.class,"restclient","country");
+      super(Country.class,"autentification","country");
   }
 }

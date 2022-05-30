@@ -27,7 +27,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  *
  * @author avbravo
  */
-@Path("/message")
+@Path("/country")
 public class CountryResources {
 
     @Inject
@@ -132,7 +132,7 @@ public class CountryResources {
         Country country = new Country();
         try {
 
-            country.setId(id);
+            country.setIdcountry(id);
             Optional<Country> optional = countryRepository.findById(country);
             if (optional.isPresent()) {
 
