@@ -18,7 +18,8 @@
         <microprofile.version>4.0.1</microprofile.version>
         <mockito-core.version>3.1.0</mockito-core.version>
         <junit-jupiter.version>5.5.0</junit-jupiter.version>
-        <version.payara>5.2021.4</version.payara>
+        <!--<version.payara>5.2021.4</version.payara>-->
+        <version.payara>5.2022.2</version.payara>
     </properties>
 
     <dependencies>
@@ -106,7 +107,15 @@
                         </option>
                     </commandLineOptions>
                 </configuration>
-                <version>1.0.6</version>
+                <version>1.4.0</version>
+                 <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
