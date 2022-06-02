@@ -14,14 +14,15 @@ public class JAXRSConfiguration extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         try {
-            JmoordbConnection jmc = new JmoordbConnection.Builder()
-                    .withSecurity(false)
-                    .withDatabase("autentification")
-                    .withHost("")
-                    .withPort(0)
-                    .withUsername("")
-                    .withPassword("")
-                    .build();
+//            JmoordbConnection jmc = new JmoordbConnection.Builder()
+//                    .withSecurity(false)
+//                    .withDatabase("autentification")
+//                    .withHost("locahost")
+//                    .withPort(27017)
+//                    .withUsername("")
+//                    .withPassword("")
+//                    .withUri("")
+//                    .build();
         } catch (Exception e) {
             System.out.println("Error " + e.getLocalizedMessage());
         }

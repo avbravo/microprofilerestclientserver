@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avbravo.restclient.entity;
+package com.avbravo.restclienservert.model;
 
 import com.avbravo.jmoordb.anotations.Id;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -15,6 +15,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
  * @author avbravo
  */
 public class Country {
+    @Id
     private String idcountry;
     private String country;
 

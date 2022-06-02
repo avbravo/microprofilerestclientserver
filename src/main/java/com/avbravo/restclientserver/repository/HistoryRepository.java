@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avbravo.restclient.repository;
+package com.avbravo.restclientserver.repository;
 
 import com.avbravo.jmoordb.mongodb.repository.Repository;
-import com.avbravo.restclient.entity.Country;
+import com.avbravo.restclienservert.model.History;
 import javax.ejb.Stateless;
 
 /**
@@ -14,9 +14,8 @@ import javax.ejb.Stateless;
  * @author avbravo
  */
 @Stateless
-public class CountryRepository extends Repository<Country> {
-
-  public CountryRepository(){
-      super(Country.class,"autentification","country");
-  }
+public class HistoryRepository extends Repository<History>{
+   public HistoryRepository(){
+        super(History.class,"autentification_history","history");
+    }  
 }

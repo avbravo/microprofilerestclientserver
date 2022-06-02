@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avbravo.restclient.resources;
+package com.avbravo.restclientserver.controller;
 
-import com.avbravo.restclient.entity.Country;
-import com.avbravo.restclient.repository.CountryRepository;
+import com.avbravo.restclienservert.model.Country;
+import com.avbravo.restclientserver.repository.CountryRepository;
 import java.util.List;
 import java.util.Optional;
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  * @author avbravo
  */
 @Path("/country")
-public class CountryResources {
+public class CountryController {
 
     @Inject
     CountryRepository countryRepository;
