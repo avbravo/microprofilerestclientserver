@@ -33,10 +33,10 @@ public class AuthentificactionIdentityStore implements IdentityStore {
     //otp
     @Inject
     @ConfigProperty(name = "userSecurity", defaultValue = "")
-    private Provider<String> userSecurity;
+    private String userSecurity;
     @Inject
     @ConfigProperty(name = "passwordSecurity", defaultValue = "")
-    private Provider<String> passwordSecurity;
+    private String passwordSecurity;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="init">
 
@@ -54,9 +54,11 @@ public class AuthentificactionIdentityStore implements IdentityStore {
             System.out.println("usernamePasswordCredential.getPasswordAsString() "+usernamePasswordCredential.getPasswordAsString());
             
             System.out.println("-------------------------------------------------");
-            System.out.println("-->>> validando "+userSecurity.get() + " passwortd "+passwordSecurity.get());
-            userAutentification = JmoordbUtil.desencriptar(userSecurity.get(), "denver16");
-            passwordAutentification = JmoordbUtil.desencriptar(passwordSecurity.get(),"denver16");
+//            System.out.println("-->>> validando "+userSecurity.get() + " passwortd "+passwordSecurity.get());
+//            userAutentification = JmoordbUtil.desencriptar(userSecurity.get(), "denver16");
+//            passwordAutentification = JmoordbUtil.desencriptar(passwordSecurity.get(),"denver16");
+            userAutentification = userSecurity;
+            passwordAutentification =passwordSecurity;
             System.out.println("-->desencriptado "+userAutentification + " : "+ passwordAutentification);
 
             if (usernamePasswordCredential.compareTo(userAutentification, passwordAutentification)) {
