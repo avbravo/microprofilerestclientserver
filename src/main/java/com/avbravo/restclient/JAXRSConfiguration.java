@@ -1,7 +1,7 @@
 package com.avbravo.restclient;
-import com.avbravo.jmoordb.configuration.JmoordbConnection;
 
 import java.util.Set;
+import javax.annotation.security.DeclareRoles;
 import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
 
 import javax.ws.rs.ApplicationPath;
@@ -10,6 +10,7 @@ import javax.ws.rs.core.Application;
 
 
 @ApplicationPath("api")
+@DeclareRoles({ "admin", "testing" })
 @BasicAuthenticationMechanismDefinition(realmName = "admin-realm")
 public class JAXRSConfiguration extends Application {
  @Override
