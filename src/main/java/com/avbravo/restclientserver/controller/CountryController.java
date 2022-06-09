@@ -57,7 +57,7 @@ public class CountryController {
     @GET
     @Path("/findall")
     @Produces(MediaType.APPLICATION_JSON)
-//  //@RolesAllowed({"admin"})
+@RolesAllowed({"admin"})
     public List<Country> findAll() {
         return countryRepository.findAll();
     }
