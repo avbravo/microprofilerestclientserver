@@ -65,7 +65,7 @@ public class CountryController {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    //@RolesAllowed({"admin"})
+    @RolesAllowed({"admin"})
     public Response add(Country country) {
         try {
             if (countryRepository.save(country)) {
