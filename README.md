@@ -86,3 +86,4 @@ http://localhost:8080/api/province/findall
 
 Kubernetes
 https://blog.payara.fish/scaling-payara-micro-applications-with-kubernetes
+https://microprofile.io/2021/09/01/videotutoriales-recorriendo-microprofile-en-espanol/
