@@ -60,12 +60,16 @@
         </dependency>
         
 
-       <dependency>
+<!--       <dependency>
           <groupId>com.github.avbravo</groupId>
             <artifactId>jmoordb</artifactId>
             <version>2.5.3</version>
+        </dependency>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jmoordb</artifactId>
+            <version>2.5.3.100</version>
         </dependency>
-
         <dependency>
             <groupId>com.github.avbravo</groupId>
             <artifactId>jmoordbutils</artifactId>

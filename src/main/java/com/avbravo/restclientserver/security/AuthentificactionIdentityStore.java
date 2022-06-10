@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avbravo.restclient.security;
+package com.avbravo.restclientserver.security;
 import com.avbravo.jmoordb.util.JmoordbUtil;
+import com.avbravo.jmoordbutils.JsfUtil;
 import static java.util.Arrays.asList;
 import java.util.HashSet;
 import javax.annotation.PostConstruct;
@@ -52,6 +53,13 @@ public class AuthentificactionIdentityStore implements IdentityStore {
             System.out.println("----------------UsernamePasswordCredential---------------------------------");
             System.out.println("usernamePasswordCredential.getCaller() "+usernamePasswordCredential.getCaller());
             System.out.println("usernamePasswordCredential.getPasswordAsString() "+usernamePasswordCredential.getPasswordAsString());
+            System.out.println("---> voy a encriptar ...username");
+       String userencripter=    JmoordbUtil.encriptar("E$g3t1.q4@n5", "JaM$x18#man12!*rWs");
+       System.out.println("---> voy a encriptar ...password");
+      String passwordencripter=     JmoordbUtil.encriptar("s7_$4wnT1den4=/pana1e1", "JaM$x18#man12!*rWs");
+            System.out.println("userencripter "+userencripter);
+            System.out.println("userencripter "+passwordencripter);
+           
             
             System.out.println("-------------------------------------------------");
 //            System.out.println("-->>> validando "+userSecurity.get() + " passwortd "+passwordSecurity.get());
