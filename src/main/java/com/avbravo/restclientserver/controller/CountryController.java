@@ -9,6 +9,7 @@ import com.avbravo.restclienservert.model.Country;
 import com.avbravo.restclientserver.repository.CountryRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -48,7 +49,7 @@ public class CountryController {
     @GET
     @Path("/first")
     @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed({"admin"})
+    @RolesAllowed({"admin"})
     public Country first() {
         return countryRepository.findAll().get(0);
     }
@@ -56,7 +57,7 @@ public class CountryController {
     @GET
     @Path("/findall")
     @Produces(MediaType.APPLICATION_JSON)
-//  //@RolesAllowed({"admin"})
+@RolesAllowed({"admin"})
     public List<Country> findAll() {
         return countryRepository.findAll();
     }
@@ -64,7 +65,7 @@ public class CountryController {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    //@RolesAllowed({"admin"})
+    @RolesAllowed({"admin"})
     public Response add(Country country) {
         try {
             if (countryRepository.save(country)) {
